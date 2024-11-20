@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta NAME="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link rel="stylesheet" href="/css/client_dash.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="sidediv">
+                <ul>
+                    <li><a href="#"></a><i class="fa-solid fa-house"></i>Home</li>
+                    <li><a href="#"></a><i class="fa-solid fa-note-sticky"></i>To-Do</li>
+                    <li><a href="#"></a><i class="fa-regular fa-comment"></i>Messages</li>
+                    <li><a href="#"></a><i class="fa-regular fa-file"></i>History</li>
+                    <li><a href="/profile.html"></a><i class="fa-solid fa-gear"></i>Profile</li>
+                    <li><a href="/Home.html"></a><i class="fa-solid fa-right-from-bracket"></i>Logout</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="top-box">
+            <img src="avatar.png" alt="Image" class="avatar">
+        </div>
+            <div class="content">
+
+        <div class="content">
+            <h1>Dashboard</h1>
+            <div class="card">
+                <div class="section">
+                    <h3>Your Request:</h3>
+                </div>
+                <div class="section">
+                    <h3>Assigned Technician:</h3>
+                </div>
+                <div class="section">
+                    <h3>Current Status:</h3>
+                </div>
+                <div class="completed" id="completed" onclick="completedStatus()"></div>
+                <div class="processing" id="processing" onclick="processingStatus()"></div>
+                <div class="rejected" id="rejected" onclick="rejectedStatus()"></div>
+                <div class="onhold" id="onhold" onclick="onholdStatus()"></div>
+            </div>
+            
+       
+            <script>
+                let completed = document.getElementById("completed");
+                let processing = document.getElementById("processing");
+                let rejected = document.getElementById("rejected");
+                let onhold = document.getElementById("onhold");
+                
+                
+                function completedStatus() {
+                    completed.classList.add('completed-status');
+                    processing.classList.add('notprocessing-status');
+                    completed.classList.remove('notcompleted-status');
+                    rejected.classList.add('notrejected-status');
+                    onhold.classList.add('notonhold-status');
+                }
+                function processingStatus() {
+                    processing.classList.add('processing-status');
+                    processing.classList.remove('notprocessing-status');
+                    completed.classList.add('notcompleted-status');
+                    rejected.classList.add('notrejected-status');
+                    onhold.classList.add('notonhold-status');
+                }
+                function rejectedStatus() {
+                    rejected.classList.add('rejected-status');
+                    rejected.classList.remove('notrejected-status');
+                    completed.classList.add('notcompleted-status');
+                    processing.classList.add('notprocessing-status');
+                    onhold.classList.add('notonhold-status');
+                }
+
+                function onholdStatus() {
+                    onhold.classList.add('onhold-status');
+                    onhold.classList.remove('notonhold-status');
+                    completed.classList.add('notcompleted-status');
+                    processing.classList.add('notprocessing-status');
+                    rejected.classList.add('notrejected-status');
+                }
+                
+            </script>
+    </body>
+</html>

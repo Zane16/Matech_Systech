@@ -1,15 +1,16 @@
-/* General reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body style */
+
 body {
     font-family: Arial, sans-serif;
     background: url('../Image/19366.jpg');
     background-size: cover;
+    background-position: center;
     color: #333;
     display: flex;
     justify-content: center;
@@ -18,38 +19,53 @@ body {
     flex-direction: column;
 }
 
-/* Navbar styling */
-nav {
-    background-color: #2c2f3f;
-    width: 100%;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    top: 0;
-    left: 0;
+
+.navbar {
+position: absolute;
+top: 0;
+background-color: #313442;
+font-family: Poppins, sans-serif;
+width: 100%;
+height: 90px;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+padding-right: 30px; 
+border-radius: 0 0 35px 35px;
 }
 
-nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
+.navbar ul {
+display: flex;
+gap: 30px; 
+list-style: none;
 }
 
-/* Main logo section */
+.navbar li a {
+color: white;
+font-size: 20px;
+font-weight: lighter;
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 15px;
+margin-right: 60px;
+}
+
+.navbar li a:hover {
+color: #ff6b6b; 
+}
+
+
+
 .main-section {
     text-align: center;
     margin-top: 100px;
 }
 
 .main-section img {
-    width: 400px; /* Make the logo larger */
+    width: 400px;
     max-width: 80%;
 }
-
-/* Sign-up buttons container */
 .signup-container {
     display: flex;
     justify-content: center;
@@ -106,6 +122,7 @@ nav a {
         flex-direction: column;
         align-items: center;
     }
+
     .signup-box {
         width: 200px;
         margin: 10px 0;
