@@ -56,7 +56,7 @@ function RetData() {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                const timestamp = new Date(data.timestamp).toLocaleString();  // Format the timestamp
+                const timestamp = new Date(data.timestamp).toLocaleString();  
                 alert(`Title: ${data.ticketTitle}\nContent: ${data.ticketContent}\nSubmitted At: ${timestamp}`);
             } else {
                 alert("No data found for the given title.");

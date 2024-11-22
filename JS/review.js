@@ -13,11 +13,11 @@ const firebaseConfig = {
     measurementId: "G-MYLH77L240"
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Function to fetch and display tickets
+
 function fetchAndDisplayTickets() {
     const dbRef = ref(db, "TicketContent");
 
@@ -27,16 +27,13 @@ function fetchAndDisplayTickets() {
                 const tickets = snapshot.val();
                 const tableBody = document.querySelector(".title_body");
 
-                tableBody.innerHTML = "";
-
+                tableBody.innerHTML = ""; 
                 
                 Object.keys(tickets).forEach((key) => {
                     const ticket = tickets[key];
 
-                  
                     const username = ticket.username || "Anonymous";
-                    const profileImage =
-                        ticket.profileImage || "https://via.placeholder.com/50";
+                    const profileImage = ticket.profileImage || "https://via.placeholder.com/50";
                     const ticketTitle = ticket.ticketTitle || "No Title";
                     const ticketTime = ticket.timestamp
                         ? new Date(ticket.timestamp).toLocaleTimeString([], {
@@ -45,8 +42,10 @@ function fetchAndDisplayTickets() {
                           })
                         : "Unknown Time";
 
-                    
+                   
                     const newRow = document.createElement("tr");
+                    
+                   
                     newRow.innerHTML = `
                         <td style="text-align: center;">
                             <img src="${profileImage}" alt="Profile Image" style="border-radius: 50%; width: 50px; height: 50px;">
@@ -55,13 +54,14 @@ function fetchAndDisplayTickets() {
                         <td style="text-align: center;">${ticketTitle}</td>
                         <td style="text-align: center;">${ticketTime}</td>
                         <td style="text-align: center;">
-                            <button class="review-btn" data-id="${key}" style="padding: 5px 10px; background-color: navy; color: white; border: none; border-radius: 5px;">Review</button>
+                            <button class="review-btn" data-id="${key}">Review</button>
                         </td>
                         <td style="text-align: center;">
-                            <button class="delete-btn" data-id="${key}" style="padding: 5px 10px; background-color: red; color: white; border: none; border-radius: 5px;">Delete</button>
+                            <button class="delete-btn" data-id="${key}">Delete</button>
                         </td>
                     `;
 
+                
                     tableBody.appendChild(newRow);
                 });
 
