@@ -12,6 +12,7 @@ body {
     
     position: relative;
     z-index: -1;
+    font-family: 'Poppins';
 }
 
 *{
@@ -64,7 +65,12 @@ li a{
     text-align: center;
     border-radius: 20px;
     padding: 50px 60px 70px;
-    z-index: 20;
+    z-index: 5;
+    
+}
+
+.hide-container{
+    visibility: hidden;
 }
 
 .signup{
@@ -171,13 +177,84 @@ input{
 }
 
 .fa-solid{
+    color: white;
     padding-right: 10px;
 }
 
 .fa-regular{
+    color: white;
     padding-right: 10px
 }
 
+.about{
+    color: white;
+    font-size: 20px;
+}
+
+.about:hover{
+    cursor: pointer;
+}
+.contacts{
+    color: white;
+    font-size: 20px;
+}
+
+.about-pop{
+    left: 30%;
+    top: 17%;
+    position: absolute;
+    height: 70%;
+    width: 40%;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 6;
+    visibility: hidden;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: lighter;
+    color: rgb(35,35,35);
+}
+
+h3 {
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: lighter;
+    color: rgb(35,35,35);
+    font-size: 25px;
+}
+
+h4{
+    text-align: center;
+    margin:5%;
+    font-weight: lighter;
+    font-size: 15px;
+    color: rgb(40,40,40);
+}
+
+
+.open-popup{
+    visibility: visible;
+}
+
+.done {
+    position:absolute;
+    right: 45%;
+    bottom: 5%;
+    padding: 1%;
+    height: 4%;
+    width: 8%;
+    color: white;
+    background-color: rgb(43, 67, 122);
+    z-index: 20;
+    border-radius: 15px;
+    text-align: center;
+}
+.done:hover {
+    cursor: pointer;
+}
 .messageDiv{
     background-color: #696969;
     position: absolute;

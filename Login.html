@@ -13,21 +13,29 @@
         </head>
 
         <body>
-            
+            <div class="about-pop" id="about-pop">
+                <h1>About Us</h1>
+                <h4>A technical support platform that allows you to assign tasks as a manager, send status updates as a technician, and get fast ticket status updates from your submited tickets as a client.</h4>
+                <h3>Who Are We?</h3>
+                <h4>We are a group of third year college students pursuing a Bachelor of Science in Information Technology, and our common objective is to improve the experience of customers requesting tech support. We know how frustrating it may be to navigate ineffective support systems because we have experienced our own difficulties with technical assistance. We are working on a project to enhance customer interactions with tech support services, making them more effective, efficient, and user-friendly, driven by our own experiences. Our project's goal is to develop solutions that tackle typical problems and, in the end, enhance the general customer experience in the tech support sector.</h4>
+                <div type="button" class="done" onclick="closeAbout()">Done</div>
+            </div>
+            <div class="aboutus" id="aboutus" onclick="openAbout()"></div>
             <nav class="navbar">
                 
                 <div class="navdiv">
                     <ul>
-                        <li><a href="#"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                        
+                        <li><a><div class="about" onclick="openAbout()"><i class="fa-solid fa-circle-info"></i>About</div></a></li>
                         <li><a href="#"><i class="fa-regular fa-address-book"></i>Contact</a></li>
                     </ul>
                 </div>
             </nav>
-            <div class="container">
+            <div class="container" id="container">
                 <div id="signInMessage" class="messageDiv" style="display: none;"></div>
                 <div class="form-box">
                     <img src="Image/MatechImg.png">
-                    <form>
+                    <form autocomplete="off">
                         
                         <div class="input-field">
                             <input type="email" id="email" placeholder="Email:" required>
@@ -45,8 +53,18 @@
       
                 </div>
             </div>
-
+            
         </body>
+        <script>
+            let about = document.getElementById("about-pop");
+            let conconcon = document.getElementById("container");
+            function openAbout(){
+                 about.classList.add('open-popup');
+                 conconcon.classList.add('hide-container');
+            }
+            function closeAbout(){
+                 about.classList.remove('open-popup');
+                 conconcon.classList.remove('hide-container');
+            }
+        </script>
     </html>
-
-    

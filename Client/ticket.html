@@ -6,6 +6,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="/css/ticket.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script type="module" src="/JS/ticket.js"></script>
     
 </head>
 <body>
@@ -30,10 +31,6 @@
     <h1>Ticket Request</h1>
 
     <div id="rectangle-1">
-        <table>
-            <tr>
-                <td>
-                    <form onsubmit="event.preventDefault();onFormSubmit()"  autocomplete="off">
                         <label>Ticket</label>
                         <div class="title_box">
                             <input type="text" name="ticket_title" id="ticket_title">
@@ -48,14 +45,8 @@
                             </div>
 
                             <div class="form-action-buttons">
-                                <input type="submit" value="submit">
-                            </div>
-                    </form>
-                </td>
-            </tr>
-        </table>
-        
+                                <button id="submit_btn">Submit</button>
+                            </div>     
     </div>
-    <script src="/JS/ticket.js"></script>
 </body>
 </html>

@@ -1,79 +1,71 @@
-function onFormSubmit(){
-    var formData = readFormData();
-    insertNewRecord(formData);
-}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+import { getDatabase, ref, child, get, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-function readFormData(){
-    var formData = {};
-    formData["ticket_title"] = document.getElementById("ticket_title").value
-    formData["ticket_body"] = document.getElementById("ticket_body").value
-    return formData;
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDe5nZSDQ-N5gTuoL2r7Q-9Z0oh7C_pc-k",
+    authDomain: "matech-01.firebaseapp.com",
+    databaseURL: "https://matech-01-default-rtdb.firebaseio.com",
+    projectId: "matech-01",
+    storageBucket: "matech-01.appspot.com",
+    messagingSenderId: "600983949439",
+    appId: "1:600983949439:web:7ba30458ad99758c87af4a",
+    measurementId: "G-MYLH77L240"
+};
 
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase(app);
+
+let ticket_title = document.getElementById('ticket_title');
+let ticket_body = document.getElementById('ticket_body');
+let submit_btn = document.getElementById('submit_btn');
+
+function AddData() {
+    if (!ticket_title.value || !ticket_body.value) {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    const timestamp = serverTimestamp();  
 
     
-}
-function insertNewRecord(data) {
-    var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow(table.length);
-    cell1 = newRow. insertCell(0);
-    cell1.innerHTML = data.ticket_title;
-    cell2 = newRow. insertCell(1);
-    cell2.innerHTML = data.ticket_body;
-    cell2 = newRow. insertCell(2);
-    cell2.innerHTML = `<a>Review</a>
-                      <a>Delete</a>`;
-    
-    
+    set(ref(db, 'TicketContent/' + ticket_title.value), {
+        ticketTitle: ticket_title.value,
+        ticketContent: ticket_body.value,
+        timestamp: timestamp  
+    })
+    .then(() => {
+        alert("Data Added Successfully");
+    })
+    .catch((error) => {
+        alert("Data could not be added: " + error.message);
+    });
 }
 
-function onFormSubmit() {
-    var formData = readFormData();
-    if (validateForm(formData)) {
-        insertNewRecord(formData);
-        resetForm();
+function RetData() {
+    if (!ticket_title.value) {
+        alert("Please provide a ticket title to search.");
+        return;
     }
+
+    const dbRef = ref(db);
+
+    get(child(dbRef, 'TicketContent/' + ticket_title.value))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                const timestamp = new Date(data.timestamp).toLocaleString();  // Format the timestamp
+                alert(`Title: ${data.ticketTitle}\nContent: ${data.ticketContent}\nSubmitted At: ${timestamp}`);
+            } else {
+                alert("No data found for the given title.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching data: ", error);
+        });
 }
 
-function validateForm(data) {
-    if (data.ticket_title === "" || data.ticket_body === "") {
-        alert("All fields are required.");
-        return false;
-    }
-    return true;
-}
-
-function resetForm() {
-    document.getElementById("ticket_title").value = "";
-    document.getElementById("ticket_body").value = "";
-}
-
-
-function onFormSubmit() {
-    var formData = readFormData();
-    if (validateForm(formData)) {
-        saveToLocalStorage(formData);
-        alert("Ticket submitted successfully!"); 
-    }
-}
-
-function readFormData() {
-    return {
-        ticket_title: document.getElementById("ticket_title").value,
-        ticket_body: document.getElementById("ticket_body").value,
-    };
-}
-
-function validateForm(data) {
-    if (data.ticket_title === "" || data.ticket_body === "") {
-        alert("All fields are required.");
-        return false;
-    }
-    return true;
-}
-
-function saveToLocalStorage(data) {
-    let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
-    tickets.push(data); 
-    localStorage.setItem("tickets", JSON.stringify(tickets)); 
-}
+submit_btn.addEventListener('click', AddData);
 

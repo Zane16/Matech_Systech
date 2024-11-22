@@ -21,7 +21,6 @@ body {
 
 li{
     width: 170px;
-    
     list-style: none;
     margin-left: 10%;
     margin-bottom: 30px;
@@ -30,7 +29,6 @@ li{
     cursor: pointer;
     
 }
-
 
 
 
@@ -52,6 +50,10 @@ ul li:nth-child(6){
     padding-right: 20px;
 }   
 
+
+a{
+    color: white;
+}
 
 .content {
 margin-left: 125px;

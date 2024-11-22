@@ -185,3 +185,26 @@ ul li:nth-child(6){
     min-width: 1000px;
 
   }
+
+  .list_review td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.review-btn, .delete-btn {
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.review-btn:hover {
+    transform: scale(1.1);
+    background-color: darkblue;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+    background-color: darkred;
+}
