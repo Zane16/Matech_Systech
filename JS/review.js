@@ -1,11 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
     getFirestore,
-    collectionGroup,
+    collection,
     query,
     getDocs,
     deleteDoc,
     doc,
+    getDoc,
+    updateDoc,
+    where,
+    setDoc,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // Firebase Configuration
@@ -22,47 +26,68 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
+// Fetch and display tickets
 async function fetchAndDisplayTickets() {
     try {
-        const ticketsQuery = query(collectionGroup(db, "Tickets")); 
+        const ticketsQuery = query(collection(db, "Tickets"));
         const ticketsSnapshot = await getDocs(ticketsQuery);
 
         const tableBody = document.querySelector(".title_body");
-        tableBody.innerHTML = ""; 
+        tableBody.innerHTML = ""; // Clear the table
 
-        ticketsSnapshot.forEach((docSnapshot) => {
+        ticketsSnapshot.forEach(async (docSnapshot) => {
             const ticket = docSnapshot.data();
             const ticketId = docSnapshot.id;
-            const ticketPath = docSnapshot.ref.path; 
             const username = ticket.username || "Anonymous";
             const profileImage = ticket.profileImage || "https://via.placeholder.com/50";
             const ticketTitle = ticket.ticketTitle || "No Title";
+            const ticketContent = ticket.ticketContent || "No Content Provided";
             const ticketTime = ticket.timestamp
                 ? new Date(ticket.timestamp.seconds * 1000).toLocaleString()
                 : "Unknown Time";
+            const technicianId = ticket.technicianId;
+
+            let technicianUsername = "Not Assigned";
+            let technicianProfileImage = "https://via.placeholder.com/50";
+            if (technicianId) {
+                const technicianRef = doc(db, "users", technicianId);
+                const technicianSnap = await getDoc(technicianRef);
+                if (technicianSnap.exists()) {
+                    const technicianData = technicianSnap.data();
+                    technicianUsername = technicianData.username || "No Username";
+                    technicianProfileImage = technicianData.profileImage || "https://via.placeholder.com/50";
+                }
+            }
 
             const newRow = document.createElement("tr");
 
             newRow.innerHTML = `
-                <td style="text-align: center;">
-                    <img src="${profileImage}" alt="Profile Image" style="border-radius: 50%; width: 50px; height: 50px;">
+                <td><img src="${profileImage}" alt="Profile Image" style="border-radius: 50%; width: 50px; height: 50px;"></td>
+                <td>${username}</td>
+                <td>${ticketTitle}</td>
+                <td>${ticketTime}</td>
+                <td>${technicianUsername}</td>
+                <td>
+                    <button class="review-btn" 
+                        data-ticket-id="${ticketId}" 
+                        data-title="${ticketTitle}" 
+                        data-content="${ticketContent}" 
+                        data-username="${username}" 
+                        data-time="${ticketTime}" 
+                        data-technician="${technicianUsername}" 
+                        data-technician-image="${technicianProfileImage}">
+                        Review
+                    </button>
                 </td>
-                <td style="text-align: center;">${username}</td>
-                <td style="text-align: center;">${ticketTitle}</td>
-                <td style="text-align: center;">${ticketTime}</td>
-                <td style="text-align: center;">
-                    <button class="review-btn" data-ticket-path="${ticketPath}">Review</button>
-                </td>
-                <td style="text-align: center;">
-                    <button class="delete-btn" data-ticket-path="${ticketPath}">Delete</button>
+                <td>
+                    <button class="delete-btn" data-ticket-id="${ticketId}">Delete</button>
                 </td>
             `;
 
             tableBody.appendChild(newRow);
         });
 
-
+      
         document.querySelectorAll(".review-btn").forEach((btn) =>
             btn.addEventListener("click", handleReview)
         );
@@ -75,20 +100,96 @@ async function fetchAndDisplayTickets() {
 }
 
 
-function handleReview(event) {
-    const ticketPath = event.target.dataset.ticketPath;
-    alert(`Reviewing ticket: ${ticketPath}`);
+async function fetchTechnicians() {
+    try {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("role", "==", "Technician"));
+        const querySnapshot = await getDocs(q);
+
+        const technicianSelect = document.getElementById("technicianSelect");
+        technicianSelect.innerHTML = `<option value="">Choose Technician</option>`; 
+        querySnapshot.forEach((doc) => {
+            const technician = doc.data();
+            const technicianId = doc.id;
+            const technicianName = technician.username || "Unnamed Technician";
+
+            const technicianOption = document.createElement("option");
+            technicianOption.value = technicianId;
+            technicianOption.textContent = technicianName;
+            technicianSelect.appendChild(technicianOption);
+        });
+    } catch (error) {
+        console.error("Error fetching technicians:", error);
+    }
 }
 
+
+function handleReview(event) {
+    const modal = document.getElementById("reviewModal");
+    const ticketId = event.target.dataset.ticketId;
+    const username = event.target.dataset.username;
+    const ticketTitle = event.target.dataset.title;
+    const ticketContent = event.target.dataset.content;
+    const ticketTime = event.target.dataset.time;
+    const technicianUsername = event.target.dataset.technician;
+    const technicianProfileImage = event.target.dataset.technicianImage;
+
+    document.getElementById("modalUsername").innerText = username;
+    document.getElementById("modalTitle").innerText = ticketTitle;
+    document.getElementById("modalContent").innerText = ticketContent;
+    document.getElementById("modalTimestamp").innerText = ticketTime;
+    document.getElementById("modalTechnician").innerText = technicianUsername;
+    document.getElementById("modalTechnicianImage").src = technicianProfileImage;
+
+    modal.style.display = "flex";
+    modal.dataset.ticketId = ticketId;
+
+    fetchTechnicians();
+}
+
+
+document.getElementById("confirmTechnicianButton").addEventListener("click", async () => {
+    const technicianSelect = document.getElementById("technicianSelect");
+    const technicianId = technicianSelect.value;
+    const modal = document.getElementById("reviewModal");
+    const ticketId = modal.dataset.ticketId;
+
+    if (technicianId) {
+        try {
+            const ticketRef = doc(db, "Tickets", ticketId);
+            await updateDoc(ticketRef, {
+                technicianId,
+                status: "assigned",
+                technicianAssignedAt: new Date(),
+            });
+
+            alert("Technician assigned successfully.");
+            fetchAndDisplayTickets();
+            modal.style.display = "none";
+        } catch (error) {
+            console.error("Error assigning technician:", error);
+            alert("Failed to assign technician.");
+        }
+    } else {
+        alert("Please select a technician.");
+    }
+});
+
+
+document.getElementById("closeModal").addEventListener("click", () => {
+    document.getElementById("reviewModal").style.display = "none";
+});
+
+
 async function handleDelete(event) {
-    const ticketPath = event.target.dataset.ticketPath;
+    const ticketId = event.target.dataset.ticketId;
 
     if (confirm("Are you sure you want to delete this ticket?")) {
         try {
-            const ticketRef = doc(db, ticketPath); 
-            await deleteDoc(ticketRef); 
+            const ticketRef = doc(db, "Tickets", ticketId);
+            await deleteDoc(ticketRef);
             alert("Ticket deleted successfully.");
-            fetchAndDisplayTickets(); 
+            fetchAndDisplayTickets();
         } catch (error) {
             console.error("Error deleting ticket:", error);
             alert("Failed to delete the ticket.");

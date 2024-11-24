@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta NAME="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="/css/review.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script type="module" src="/JS/review.js"></script>
-    
+    <title>Ticket Review</title>
 </head>
 <body>
     <div id="rectangle-top"></div>
@@ -23,7 +23,10 @@
             </ul>
         </div>
     </div>
+
     <h1>Tickets</h1>
+
+    <!-- Tickets Table -->
     <div class="rectangle-1">
         <table class="list_review" id="employeeList">
             <thead>
@@ -31,19 +34,41 @@
                     <th>Profile</th>
                     <th>Title</th>
                     <th>Complaint</th>
+                    <th>Technician</th>
+                    <th>Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-
             <tbody class="title_body">
-                <tr>
-
-                </tr>
+                <!-- Tickets will be populated here by JS -->
             </tbody>
         </table>
-
     </div>
-    
 
-    
+    <!-- Loading Message for Technician Dropdown -->
+    <div id="loadingTechnicians" style="display: none; text-align: center; font-size: 16px; color: #555;">
+        Loading technicians...
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <h2>Review Ticket</h2>
+            <p><strong>Username:</strong> <span id="modalUsername"></span></p>
+            <p><strong>Title:</strong> <span id="modalTitle"></span></p>
+            <p><strong>Content:</strong> <span id="modalContent"></span></p>
+            <p><strong>Submitted at:</strong> <span id="modalTimestamp"></span></p>
+            <p><strong>Technician:</strong> <span id="modalTechnician"></span></p>
+            <img id="modalTechnicianImage" src="" alt="Technician Image" style="width: 50px; height: 50px; border-radius: 50%;">
+            
+            <label for="technicianSelect">Assign Technician:</label>
+            <select id="technicianSelect">
+                <option value="">Choose Technician</option>
+            </select>
+            
+            <button id="confirmTechnicianButton">Confirm Technician</button>
+        </div>
+    </div>
 </body>
 </html>

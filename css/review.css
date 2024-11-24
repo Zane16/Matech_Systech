@@ -1,19 +1,23 @@
 body {
     font-family: 'Poppins';
     background: rgb(239, 242, 251);
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    background-color: #EFF2FB;
 }
+
 #rectangle-top {
     position: absolute;
     width: 100%;
     height: 100px;
     background: white;
     top: 0;
-    left: 0;            
+    left: 0;
 }
 
-
 h1 {
-    position:absolute;
+    position: absolute;
     font-family: 'Poppins';
     left: 300px;
     top: 100px;
@@ -21,140 +25,94 @@ h1 {
     color: rgb(45, 85, 180);
 }
 
-
-
-
-.sidebar{
-position: absolute;
-width: 260px;
-height: 100%;
-border-radius: 0% 30px 30px 0%;
-background-color: #313442;
-z-index: 1;
-}
-
-
-body {
-    background-position: center;
-    background-size: cover;
-    margin: 0;
-    background-color: #EFF2FB;
-}
-
-.sidebar{
+.sidebar {
     position: absolute;
     width: 260px;
     height: 100%;
     border-radius: 0% 30px 30px 0%;
     background-color: #313442;
+    z-index: 1;
 }
 
-.sidediv{
+.sidediv {
     font-family: Poppins;
     padding: 20px;
     margin-top: 30px;
 }
 
-li{
+li {
     width: 170px;
-    
     list-style: none;
     margin-left: 10%;
     margin-bottom: 30px;
     color: #ffffff;
     font-size: 21px;
     cursor: pointer;
-    
 }
-a{
+
+a {
     text-decoration: none;
     color: white;
 }
 
-a:hover{
+a:hover {
     color: #2D55B4;
 }
 
-ul li:nth-child(5){
+ul li:nth-child(5) {
     position: absolute;
     bottom: 200px;
-
 }
-ul li:nth-child(6){
+
+ul li:nth-child(6) {
     position: absolute;
     bottom: 140px;
-
 }
 
-.fa-solid{
-    padding-right: 20px;
-}
-.fa-regular{
+.fa-solid {
     padding-right: 20px;
 }
 
-.top-box{
-    position: absolute;
-    top: 0;
-    width: 1535px;
-    height: 100px;
-    background-color: #ffffff;
-    z-index: -1;
+.fa-regular {
+    padding-right: 20px;
 }
 
-.avatar {
-    position: absolute;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    right: 400px;
-    top: 20px;
-    color: #313442;
-    
-  }
-
-  .list_review{
+.list_review {
     font-size: 1.1em;
     position: absolute;
     font-weight: lighter;
     top: 200px;
     left: 300px;
-   
-  }
+}
 
-  .list_review thead tr{
+.list_review thead tr {
     position: absolute;
     background-color: #5f5f5f;
     color: #ffffff;
     text-align: left;
-    min-width: 1000px;  
-    
-  }
+    min-width: 1000px;
+}
 
-
-  
-  .title_body{
+.title_body {
     border-collapse: collapse;
     position: absolute;
     font-size: 1em;
     font-weight: lighter;
     top: 40px;
     min-width: 1000px;
+}
 
-  }
-
-  .list_review td {
+.list_review td {
     padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
 
 td:nth-child(5), td:nth-child(6) {
-    justify-content: space-between; 
-    align-items: center;           
+    justify-content: space-between;
+    align-items: center;
     display: inline-block;
 }
-
 
 button {
     padding: 8px 16px;
@@ -165,24 +123,107 @@ button {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Review button styling */
 .review-btn {
-    background-color: #233766; 
+    background-color: #233766;
     color: white;
 }
 
 .review-btn:hover {
-    background-color: #1e2f56; 
+    background-color: #1e2f56;
     transform: scale(1.05);
 }
 
-
 .delete-btn {
-    background-color: #71161f; 
+    background-color: #71161f;
     color: white;
 }
 
 .delete-btn:hover {
-    background-color: #581118; 
+    background-color: #581118;
     transform: scale(1.05);
+}
+
+/* Modal overlay */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+/* Close button in the modal header */
+.modal-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Modal body */
+.modal-body {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* Modal footer */
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Close button in the footer */
+.close-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for close button */
+.close-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#technicianSelect {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
 }
