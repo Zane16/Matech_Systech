@@ -39,31 +39,39 @@
                 </tr>
             </thead>
             <tbody class="title_body">
-                <!-- Tickets will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
 
-    <!-- Review Modal -->
+    <div id="loadingTechnicians" style="display: none; text-align: center; font-size: 16px; color: #555;">
+        Loading technicians...
+    </div>
+
     <div id="reviewModal" class="modal">
         <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <h2>Review Ticket</h2>
-            <p><strong>Username:</strong> <span id="modalUsername"></span></p>
-            <p><strong>Title:</strong> <span id="modalTitle"></span></p>
-            <p><strong>Content:</strong> <span id="modalContent"></span></p>
-            <p><strong>Time Submitted:</strong> <span id="modalTimestamp"></span></p>
-            <p><strong>Assigned Technician:</strong> <span id="modalTechnician"></span> <img id="modalTechnicianImage" src="" alt="Technician" style="width: 50px; border-radius: 50%;"></p>
-            <div>
-                <label for="technicianSelect">Assign Technician:</label>
-                <select id="technicianSelect">
-                    <!-- Technicians will be dynamically loaded here -->
-                </select>
+            <div class="modal-header">
+                <h2>Ticket Details</h2>
+                <p><strong></strong> <span id="modalTimestamp" style="opacity: 0.5;"></span></p>
+                <button id="closeModal" class="close-btn">X</button>
             </div>
-            <button id="confirmTechnicianButton">Assign Technician</button>
+            <div class="modal-body">
+                <p><strong>Username:</strong> <span id="modalUsername"></span></p>
+                <p><strong>Title:</strong> <span id="modalTitle"></span></p>
+                <p><strong>Content:</strong> <span id="modalContent"></span></p>
+                <p><strong>Assigned Technician:</strong> <span id="modalTechnician"></span></p>
+                <img id="modalTechnicianImage" src="" alt="Technician Profile Image" style="border-radius: 50%; width: 50px; height: 50px; margin-top: 10px;">
+                
+                <div id="technicianSelectContainer" style="margin-top: 20px;">
+                    <p><strong>Assign Technician:</strong></p>
+                    <select id="technicianSelect">
+                        <option value="">Choose Technician</option>
+                    </select>
+                    
+                    <button id="confirmTechnicianButton" style="margin-top: 10px;">Confirm Technician</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script type="module" src="/JS/review.js"></script>
 </body>
 </html>

@@ -9,7 +9,6 @@ import {
     getDoc,
     updateDoc,
     where,
-    setDoc,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // Firebase Configuration
@@ -23,161 +22,203 @@ const firebaseConfig = {
     measurementId: "G-MYLH77L240",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore
 const db = getFirestore(app);
 
 // Fetch and display tickets
 async function fetchAndDisplayTickets() {
     try {
-        const ticketsQuery = query(collection(db, "Tickets"));
-        const ticketsSnapshot = await getDocs(ticketsQuery);
+        const usersQuery = query(collection(db, "users"));
+        const usersSnapshot = await getDocs(usersQuery);
 
         const tableBody = document.querySelector(".title_body");
         tableBody.innerHTML = ""; // Clear the table
 
-        if (ticketsSnapshot.empty) {
+        if (usersSnapshot.empty) {
             const noTicketsRow = document.createElement("tr");
-            noTicketsRow.innerHTML = `<td colspan="7">No tickets available</td>`;
+            noTicketsRow.innerHTML = `<td colspan="7">No users found</td>`;
             tableBody.appendChild(noTicketsRow);
             return;
         }
 
-        ticketsSnapshot.forEach(async (docSnapshot) => {
-            const ticket = docSnapshot.data();
-            const ticketId = docSnapshot.id;
-            const username = ticket.username || "Anonymous";
-            const profileImage = ticket.profileImage || "https://via.placeholder.com/50";
-            const ticketTitle = ticket.ticketTitle || "No Title";
-            const ticketContent = ticket.ticketContent || "No Content Provided";
-            const ticketTime = ticket.timestamp
-                ? new Date(ticket.timestamp.seconds * 1000).toLocaleString()
-                : "Unknown Time";
-            const technicianId = ticket.technicianId;
+        // Iterate over each user document
+        usersSnapshot.forEach(async (userDocSnapshot) => {
+            const userId = userDocSnapshot.id;
+            const userData = userDocSnapshot.data();
+            const username = userData.username || "Anonymous";
 
-            let technicianUsername = "Not Assigned";
-            let technicianProfileImage = "https://via.placeholder.com/50";
-            if (technicianId) {
-                const technicianRef = doc(db, "users", technicianId);
-                const technicianSnap = await getDoc(technicianRef);
-                if (technicianSnap.exists()) {
-                    const technicianData = technicianSnap.data();
-                    technicianUsername = technicianData.username || "No Username";
-                    technicianProfileImage = technicianData.profileImage || "https://via.placeholder.com/50";
+            // Get the userTickets subcollection for each user
+            const ticketsQuery = query(collection(db, "users", userId, "userTickets"));
+            const ticketsSnapshot = await getDocs(ticketsQuery);
+
+            // If no tickets found for this user, skip to the next user
+            if (ticketsSnapshot.empty) return;
+
+            // Iterate over each ticket in the userTickets subcollection
+            ticketsSnapshot.forEach(async (ticketDocSnapshot) => {
+                const ticket = ticketDocSnapshot.data();
+                const ticketId = ticketDocSnapshot.id;
+                const profileImage = ticket.profileImage || "https://via.placeholder.com/50";
+                const ticketTitle = ticket.ticketTitle || "No Title";
+                const ticketContent = ticket.ticketContent || "No Content Provided";
+                const ticketTime = ticket.timestamp
+                    ? new Date(ticket.timestamp.seconds * 1000).toLocaleString()
+                    : "Unknown Time";
+                const technicianId = ticket.technicianId;
+
+                let technicianUsername = "Not Assigned";
+                let technicianProfileImage = "https://via.placeholder.com/50";
+                if (technicianId) {
+                    const technicianRef = doc(db, "users", technicianId); // Reference to the "users" collection
+                    const technicianSnap = await getDoc(technicianRef);
+                    if (technicianSnap.exists()) {
+                        const technicianData = technicianSnap.data();
+                        technicianUsername = technicianData.username || "No Username";
+                        technicianProfileImage = technicianData.profileImage || "https://via.placeholder.com/50";
+                    }
                 }
-            }
 
-            const newRow = document.createElement("tr");
+                const newRow = document.createElement("tr");
+                newRow.dataset.userId = userId; // Store the userId here for later use
 
-            newRow.innerHTML = `
-                <td><img src="${profileImage}" alt="Profile Image" style="border-radius: 50%; width: 50px; height: 50px;"></td>
-                <td>${username}</td>
-                <td>${ticketTitle}</td>
-                <td>${ticketTime}</td>
-                <td>${technicianUsername}</td>
-                <td>
-                    <button class="review-btn" 
-                        data-ticket-id="${ticketId}" 
-                        data-title="${ticketTitle}" 
-                        data-content="${ticketContent}" 
-                        data-username="${username}" 
-                        data-time="${ticketTime}" 
-                        data-technician="${technicianUsername}" 
-                        data-technician-image="${technicianProfileImage}">
-                        Review
-                    </button>
-                </td>
-                <td>
-                    <button class="delete-btn" data-ticket-id="${ticketId}">Delete</button>
-                </td>
-            `;
+                newRow.innerHTML = `
+                    <td><img src="${profileImage}" alt="Profile Image" style="border-radius: 50%; width: 50px; height: 50px;"></td>
+                    <td>${username}</td>
+                    <td>${ticketTitle}</td>
+                    <td>${ticketTime}</td>
+                    <td>${technicianUsername}</td>
+                    <td>
+                        <button class="review-btn" 
+                            data-ticket-id="${ticketId}" 
+                            data-title="${ticketTitle}" 
+                            data-content="${ticketContent}" 
+                            data-username="${username}" 
+                            data-time="${ticketTime}" 
+                            data-technician="${technicianUsername}" 
+                            data-technician-image="${technicianProfileImage}">
+                            Review
+                        </button>
+                    </td>
+                    <td>
+                        <button class="delete-btn" data-ticket-id="${ticketId}">Delete</button>
+                    </td>
+                `;
 
-            tableBody.appendChild(newRow);
+                tableBody.appendChild(newRow);
+
+                // Attach event listeners for the newly added buttons
+                const reviewBtn = newRow.querySelector(".review-btn");
+                const deleteBtn = newRow.querySelector(".delete-btn");
+
+                // Review button click handler
+                reviewBtn.addEventListener("click", handleReview);
+
+                // Delete button click handler
+                deleteBtn.addEventListener("click", handleDelete);
+            });
         });
-
-        document.querySelectorAll(".review-btn").forEach((btn) =>
-            btn.addEventListener("click", handleReview)
-        );
-        document.querySelectorAll(".delete-btn").forEach((btn) =>
-            btn.addEventListener("click", handleDelete)
-        );
     } catch (error) {
         console.error("Error fetching tickets:", error);
     }
 }
 
-// Review button handler
-function handleReview(event) {
-    const modal = document.getElementById("reviewModal");
+// Fetch and populate the technician dropdown
+async function fetchTechnicians() {
+    try {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("role", "==", "Technician"));
+        const querySnapshot = await getDocs(q);
+
+        const technicianSelect = document.getElementById("technicianSelect");
+        technicianSelect.innerHTML = `<option value="">Choose Technician</option>`; // Reset the options
+        querySnapshot.forEach((doc) => {
+            const technician = doc.data();
+            const technicianId = doc.id;
+            const technicianName = technician.username || "Unnamed Technician";
+
+            const technicianOption = document.createElement("option");
+            technicianOption.value = technicianId;
+            technicianOption.textContent = technicianName;
+
+            technicianSelect.appendChild(technicianOption);
+        });
+
+        document.getElementById("loadingTechnicians").style.display = "none"; // Hide loading text when done
+    } catch (error) {
+        console.error("Error fetching technicians:", error);
+    }
+}
+
+// Handle the review button click
+async function handleReview(event) {
     const ticketId = event.target.dataset.ticketId;
     const username = event.target.dataset.username;
     const ticketTitle = event.target.dataset.title;
     const ticketContent = event.target.dataset.content;
     const ticketTime = event.target.dataset.time;
     const technicianUsername = event.target.dataset.technician;
-    const technicianProfileImage = event.target.dataset.technicianImage;
+    const technicianImage = event.target.dataset.technicianImage;
+    const userId = event.target.closest("tr").dataset.userId; // Correctly get userId here
 
-    document.getElementById("modalUsername").innerText = username;
-    document.getElementById("modalTitle").innerText = ticketTitle;
-    document.getElementById("modalContent").innerText = ticketContent;
-    document.getElementById("modalTimestamp").innerText = ticketTime;
-    document.getElementById("modalTechnician").innerText = technicianUsername;
-    document.getElementById("modalTechnicianImage").src = technicianProfileImage;
+    // Open the modal
+    const modal = document.getElementById("reviewModal");
+    const closeModal = document.getElementById("closeModal");
+    const confirmTechnicianButton = document.getElementById("confirmTechnicianButton");
 
-    modal.style.display = "flex";
-    modal.dataset.ticketId = ticketId;
+    document.getElementById("modalUsername").textContent = username;
+    document.getElementById("modalTitle").textContent = ticketTitle;
+    document.getElementById("modalContent").textContent = ticketContent;
+    document.getElementById("modalTimestamp").textContent = ticketTime;
+    document.getElementById("modalTechnician").textContent = technicianUsername;
+    document.getElementById("modalTechnicianImage").src = technicianImage;
 
-    fetchTechnicians();
+    // Show the modal
+    modal.style.display = "block";
+
+    // Close the modal
+    closeModal.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    // Confirm technician assignment
+    confirmTechnicianButton.onclick = async () => {
+        const selectedTechnicianId = document.getElementById("technicianSelect").value;
+
+        if (selectedTechnicianId) {
+            try {
+                const ticketRef = doc(db, "users", userId, "userTickets", ticketId);
+                await updateDoc(ticketRef, { technicianId: selectedTechnicianId });
+                alert("Technician assigned successfully!");
+                fetchAndDisplayTickets();
+            } catch (error) {
+                console.error("Error assigning technician:", error);
+                alert("Failed to assign technician.");
+            }
+        }
+    };
 }
 
-// Technician select handler
-document.getElementById("confirmTechnicianButton").addEventListener("click", async () => {
-    const technicianSelect = document.getElementById("technicianSelect");
-    const technicianId = technicianSelect.value;
-    const modal = document.getElementById("reviewModal");
-    const ticketId = modal.dataset.ticketId;
-
-    if (technicianId) {
-        try {
-            const ticketRef = doc(db, "Tickets", ticketId);
-            await updateDoc(ticketRef, {
-                technicianId,
-                status: "assigned",
-                technicianAssignedAt: new Date(),
-            });
-
-            alert("Technician assigned successfully.");
-            fetchAndDisplayTickets();
-            modal.style.display = "none";
-        } catch (error) {
-            console.error("Error assigning technician:", error);
-            alert("Failed to assign technician.");
-        }
-    } else {
-        alert("Please select a technician.");
-    }
-});
-
-// Close modal
-document.getElementById("closeModal").addEventListener("click", () => {
-    document.getElementById("reviewModal").style.display = "none";
-});
-
-// Delete ticket handler
+// Handle ticket delete
 async function handleDelete(event) {
     const ticketId = event.target.dataset.ticketId;
+    const ticketRef = doc(db, "users", event.target.closest("tr").dataset.userId, "userTickets", ticketId); // Correct reference to userTickets subcollection
 
-    if (confirm("Are you sure you want to delete this ticket?")) {
-        try {
-            const ticketRef = doc(db, "Tickets", ticketId);
-            await deleteDoc(ticketRef);
-            alert("Ticket deleted successfully.");
-            fetchAndDisplayTickets();
-        } catch (error) {
-            console.error("Error deleting ticket:", error);
-            alert("Failed to delete the ticket.");
-        }
+    try {
+        await deleteDoc(ticketRef);
+        alert("Ticket deleted successfully!");
+        fetchAndDisplayTickets(); // Refresh the ticket list
+    } catch (error) {
+        console.error("Error deleting ticket:", error);
+        alert("Failed to delete ticket.");
     }
 }
 
-// Fetch and display tickets when the page loads
-document.addEventListener("DOMContentLoaded", fetchAndDisplayTickets);
+// Initialize and fetch tickets and technicians on page load
+window.onload = async () => {
+    fetchAndDisplayTickets();
+    document.getElementById("loadingTechnicians").style.display = "block"; // Show loading text
+    fetchTechnicians();
+};
