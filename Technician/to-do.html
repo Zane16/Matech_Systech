@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta NAME="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="/css/ticket.css">
+    <link rel="stylesheet" href="/css/todo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <script type="module" src="/JS/ticket.js"></script>
+    <script type="module" src="/JS/todo.js"></script>
     
 </head>
 <body>
+    <div id="rectangle-top"></div>
     <div class="sidebar">
         <div class="sidediv">
             <ul>
@@ -22,32 +23,23 @@
             </ul>
         </div>
     </div>
+    <h1>Tickets</h1>
+    <div class="rectangle-1">
+        <table class="list_review" id="employeeList">
+            <thead>
+                <tr>
+                    <th>Profile</th>
+                    <th>Title</th>
+                    <th>Complaint</th>
+                </tr>
+            </thead>
 
+            <tbody class="title_body">
+                <tr>
 
-
-
-    
-    <div id="rectangle-2"></div>
-    <h1>Ticket Request</h1>
-
-    <div id="rectangle-1">
-                        <label>Ticket</label>
-                        <div class="title_box">
-                            <input type="text" name="ticket_title" id="ticket_title" placeholder="Ticket Title">
-                        </div> 
-
-                        <div class="ticket_head">
-                            <label>Ticket Body</label>
-                        </div>
-                            
-                            <textarea class="text_body" id="ticket_body" placeholder="Write Here..."></textarea>
-
-                            
-                            <button id="submit_btn" onclick="clearInput()">Submit</button>
-                            
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
-<script>
-    
-</script>
 </html>

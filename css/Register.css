@@ -51,17 +51,20 @@ li a{
     font-size: 250%;
     font-family: poppins;
     font-weight: 100;
+    font-weight: bold;
 }
 
 .container{
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
     width: 20%;
     max-width: 450px;
-    height: 430px;
+    height: 480px;
     position: absolute;
-    top: 55%;
-    left: 50%;
+    top: 15%;
+    left: 37%;
     transform: translate(-50%,-50%);
-    background: rgba(255, 255, 255, 0.4);
+    background: white;
     text-align: center;
     border-radius: 20px;
     padding: 50px 60px 70px;
@@ -189,4 +192,15 @@ input{
     font-size: 1rem;
     opacity: 0;
     animation: fadeOut 7s forwards;
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

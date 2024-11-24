@@ -1,27 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* General reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+     body {
+    font-family: Arial, sans-serif;
+    background: url('/Image/19366.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
 
-        /* Body style */
-        body {
-            font-family: Arial, sans-serif;
-            background: url('../Image/19366.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        /* Navbar styling */
-.navbar {
+    .navbar {
     position: absolute;
     top: 0;
     background-color: #313442;
@@ -31,13 +26,13 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 30px; /* Adds some space on the right */
+    padding-right: 30px;
     border-radius: 0 0 35px 35px;
 }
 
 .navbar ul {
     display: flex;
-    gap: 30px; /* Space between the links */
+    gap: 30px;
     list-style: none;
 }
 
@@ -48,86 +43,80 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between the icon and text */
+    gap: 8px;
 }
 
 .navbar li a:hover {
-    color: #ff6b6b; /* Optional hover effect for better feedback */
+    color: #ff6b6b;
 }
 
+     .main-section {
+    text-align: center;
+    margin-top: 100px;
+}
 
-        /* Main logo section */
-        .main-section {
-            text-align: center;
-            margin-top: 100px;
-        }
+.main-section img {
+    width: 400px;
+    max-width: 80%;
+}
 
-        .main-section img {
-            width: 400px;
-            max-width: 80%;
-        }
+     .signup-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
 
-        /* Sign-up buttons container */
-        .signup-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 10px;
-        }
+     .signup-box {
+    background-color: #333;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        /* Sign-up buttons styling */
-        .signup-box {
-            background-color: #333;
-            color: white;
-            padding: 20px 30px;
-            border-radius: 8px;
-            text-align: center;
-            width: 180px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.signup-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
-        .signup-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
+.signup-box h3 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #bbb;
+    margin-bottom: 5px;
+}
 
-        .signup-box h3 {
-            font-size: 14px;
-            font-weight: normal;
-            color: #bbb;
-            margin-bottom: 5px;
-        }
+.signup-box a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
 
-        .signup-box a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            display: block;
-        }
+     .signup-box.technician {
+    background-color: white;
+    color: #333;
+    border: 2px solid #007bff;
+}
 
-        /* Technician button styling */
-        .signup-box.technician {
-            background-color: white;
-            color: #333;
-            border: 2px solid #007bff;
-        }
+.signup-box.technician a {
+    color: #007bff;
+}
 
-        .signup-box.technician a {
-            color: #007bff;
-        }
+/* Responsive styling */
+@media (max-width: 600px) {
+    .signup-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-        /* Responsive styling */
-        @media (max-width: 600px) {
-            .signup-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .signup-box {
-                width: 200px;
-                margin: 10px 0;
-            }
-        }
-
+    .signup-box {
+        width: 200px;
+        margin: 10px 0;
+    }
+}
