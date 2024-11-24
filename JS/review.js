@@ -19,23 +19,22 @@ const firebaseConfig = {
     measurementId: "G-MYLH77L240",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Function to fetch and display tickets
+
 async function fetchAndDisplayTickets() {
     try {
-        const ticketsQuery = query(collectionGroup(db, "Tickets")); // Fetch all tickets from subcollections
+        const ticketsQuery = query(collectionGroup(db, "Tickets")); 
         const ticketsSnapshot = await getDocs(ticketsQuery);
 
         const tableBody = document.querySelector(".title_body");
-        tableBody.innerHTML = ""; // Clear the table
+        tableBody.innerHTML = ""; 
 
         ticketsSnapshot.forEach((docSnapshot) => {
             const ticket = docSnapshot.data();
             const ticketId = docSnapshot.id;
-            const ticketPath = docSnapshot.ref.path; // Full path to the document
+            const ticketPath = docSnapshot.ref.path; 
             const username = ticket.username || "Anonymous";
             const profileImage = ticket.profileImage || "https://via.placeholder.com/50";
             const ticketTitle = ticket.ticketTitle || "No Title";
@@ -43,7 +42,6 @@ async function fetchAndDisplayTickets() {
                 ? new Date(ticket.timestamp.seconds * 1000).toLocaleString()
                 : "Unknown Time";
 
-            // Create a new table row
             const newRow = document.createElement("tr");
 
             newRow.innerHTML = `
@@ -64,7 +62,7 @@ async function fetchAndDisplayTickets() {
             tableBody.appendChild(newRow);
         });
 
-        // Add event listeners to the buttons
+
         document.querySelectorAll(".review-btn").forEach((btn) =>
             btn.addEventListener("click", handleReview)
         );
@@ -76,22 +74,21 @@ async function fetchAndDisplayTickets() {
     }
 }
 
-// Function to handle ticket review
+
 function handleReview(event) {
     const ticketPath = event.target.dataset.ticketPath;
     alert(`Reviewing ticket: ${ticketPath}`);
 }
 
-// Function to handle ticket deletion
 async function handleDelete(event) {
     const ticketPath = event.target.dataset.ticketPath;
 
     if (confirm("Are you sure you want to delete this ticket?")) {
         try {
-            const ticketRef = doc(db, ticketPath); // Get the document reference from the path
-            await deleteDoc(ticketRef); // Delete the document
+            const ticketRef = doc(db, ticketPath); 
+            await deleteDoc(ticketRef); 
             alert("Ticket deleted successfully.");
-            fetchAndDisplayTickets(); // Refresh the table
+            fetchAndDisplayTickets(); 
         } catch (error) {
             console.error("Error deleting ticket:", error);
             alert("Failed to delete the ticket.");

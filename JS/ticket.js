@@ -36,7 +36,6 @@ async function AddData() {
     }
 
     try {
-        // Fetch user data from Firestore
         const userDocRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
 
@@ -45,14 +44,13 @@ async function AddData() {
             return;
         }
 
-        const username = userDoc.data().username; // Get username from user data
+        const username = userDoc.data().username; 
 
-        // Add ticket to the user's Tickets subcollection
         await addDoc(collection(db, `users/${user.uid}/Tickets`), {
             ticketTitle: ticket_title.value,
             ticketContent: ticket_body.value,
             timestamp: serverTimestamp(),
-            username: username, // Include the username
+            username: username, 
         });
 
         alert("Ticket submitted successfully.");
