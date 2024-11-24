@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     background: #000000;
@@ -26,7 +25,7 @@ body {
     font-family: Poppins;
     width: 100%;
     height: 90px;
- 
+    
 }
 .navdiv{
         position: absolute;
@@ -35,6 +34,14 @@ body {
         
         right: 10px;
         top: 15px;
+}
+
+.navdiv a div:hover i{
+    color: #2D55B4;
+}
+
+.navdiv div:hover{
+    color: #2D55B4;
 }
 
 li{
@@ -67,10 +74,6 @@ li a{
     padding: 50px 60px 70px;
     z-index: 5;
     
-}
-
-.hide-container{
-    visibility: hidden;
 }
 
 .signup{
@@ -132,8 +135,11 @@ li a{
     align-items: center; 
     justify-content: center;
     margin: 5px 0;
-    
+}
 
+.google:hover {
+    background-color: rgb(210, 210, 210);
+    cursor: pointer;
 }
 
 .google img{
@@ -186,9 +192,19 @@ input{
     padding-right: 10px
 }
 
+.fa-circle-info {
+    top: 16.5%;
+    right: 85%;
+    position: absolute;
+}
+
 .about{
     color: white;
     font-size: 20px;
+    right: 100%;
+    position: absolute;
+    display: inline;
+    top: 16px;
 }
 
 .about:hover{
@@ -197,6 +213,14 @@ input{
 .contacts{
     color: white;
     font-size: 20px;
+    right: 30%;
+    position: absolute;
+    display: inline;
+    top: 16px;
+}
+
+.contacts:hover {
+    cursor: pointer;
 }
 
 .about-pop{
@@ -208,6 +232,17 @@ input{
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.4);
     z-index: 6;
+    visibility: hidden;
+}
+
+.contacts-pop {
+    left: 35%;
+    top: 17%;
+    position: absolute;
+    height: 70%;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
     visibility: hidden;
 }
 
@@ -227,10 +262,13 @@ h3 {
 }
 
 h4{
-    text-align: center;
-    margin:5%;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-top:3%;
+    margin-left: 10%;
+    margin-right: 10%;
     font-weight: lighter;
-    font-size: 15px;
+    font-size: 75%;
     color: rgb(40,40,40);
 }
 
@@ -239,22 +277,111 @@ h4{
     visibility: visible;
 }
 
+.open-contacts{
+    visibility: visible;
+}
+
 .done {
     position:absolute;
     right: 45%;
     bottom: 5%;
     padding: 1%;
-    height: 4%;
-    width: 8%;
+    height: 1.5em;
+    width: 3em;
+    color: white;
+    background-color: rgb(43, 67, 122);
+    z-index: 20;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 15;
+}
+.done:hover {
+    cursor: pointer;
+    background-color: rgb(52, 81, 146);
+}
+
+.Contactus {
+    position:absolute;
+    right: 37%;
+    bottom: 5%;
+    padding: 1%;
+    height: 1.5em;
+    width: 26%;
     color: white;
     background-color: rgb(43, 67, 122);
     z-index: 20;
     border-radius: 15px;
     text-align: center;
 }
-.done:hover {
+
+.Contactus:hover {
+    cursor: pointer;
+    background-color: rgb(52, 81, 146);
+}
+
+.Name input {
+    font-family: sans-serif;
+    font-weight: lighter;
+    width: 60%;;
+    position: relative;
+    left: 20%;
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 1px;
+    padding: 0 0;
+    padding-top: 20px;
+    font-size: 16px;
+}
+
+.Email input {
+    font-family: sans-serif;
+    font-weight: lighter;
+    width: 60%;;
+    position: relative;
+    left: 20%;
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 1px;
+    padding: 0 0;
+    padding-top: 30px;
+    font-size: 16px;
+}
+
+textarea {
+    font-family: sans-serif;
+    font-weight: lighter;
+    width: 60%;;
+    position: relative;
+    left: 20%;
+    height: 40%;
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 1px;
+    outline: none;
+    padding: 0 0;
+    padding-top: 30px;
+    font-size: 16px;
+    background-color: transparent;
+    resize: none;
+}
+
+#signIn-btn:hover {
+    background-color: rgb(65, 68, 88);
     cursor: pointer;
 }
+
+.signupline {
+    color: rgb(40, 40, 150);
+}
+
+.signupline:hover {
+    color: rgb(68, 68, 255);
+}
+
+.hide-container{
+    visibility: hidden;
+}
+
 .messageDiv{
     background-color: #696969;
     position: absolute;

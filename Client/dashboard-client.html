@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -8,53 +7,77 @@
         <link rel="stylesheet" href="/css/client_dash.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <style>
+            
+        </style>
     </head>
 
+
+
+
+
+
+
+
     <body>
-        <div class="sidebar">
-            <div class="sidediv">
-                <ul>
-                    <li><a href="#"></a><i class="fa-solid fa-house"></i>Home</li>
-                    <li><a href="ticket.html"><i class="fa-solid fa-note-sticky"></i>Request</a></li>
-                    <li><a href="#"></a><i class="fa-regular fa-comment"></i>Messages</li>
-                    <li><a href="#"></a><i class="fa-regular fa-file"></i>History</li>
-                    <li><a href="/profile.html"></a><i class="fa-solid fa-gear"></i>Profile</li>
-                    <li><a href="/Home.html"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
-                </ul>
+        <div class="sidebar-wrapper">
+            <div class="sidebar">
+                <div class="sidediv">
+                    <ul>
+                        <li class="active"><a href="#"><i class="fa-solid fa-house"></i>Home</a></li>
+                        <li><a href="#"><i class="fa-solid fa-note-sticky"></i>Request</a></li>
+                        <li><a href="#"><i class="fa-regular fa-comment"></i>Messages</a></li>
+                        <li><a href="#"><i class="fa-regular fa-file"></i>History</a></li>
+                        <li><a href="profile.html"><i class="fa-solid fa-gear"></i>Profile</a></li>
+                        <li><a href="Home.html"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        
+       
         <div class="top-box">
             <img src="avatar.png" alt="Image" class="avatar">
         </div>
             <div class="content">
 
+
+
+
+
+
+
+
         <div class="content">
             <h1>Dashboard</h1>
             <div class="card">
+                <div id="separate"></div>
+                <div id="separate-2"></div>
                 <div class="section">
-                    <h3>Your Request:</h3>
+                    <h3>Current Request:</h3>
                 </div>
                 <div class="section">
                     <h3>Assigned Technician:</h3>
                 </div>
                 <div class="section">
-                    <h3>Current Status:</h3>
+                    <h3 id="updatestatus">Current Status:</h3>
                 </div>
-                <div class="completed" id="completed" onclick="completedStatus()"></div>
-                <div class="processing" id="processing" onclick="processingStatus()"></div>
-                <div class="rejected" id="rejected" onclick="rejectedStatus()"></div>
-                <div class="onhold" id="onhold" onclick="onholdStatus()"></div>
+                <div class="komplitid">Completed</div>
+                <div class="prusising">Processing</div>
+                <div class="rijiktid">Rejected</div>
+                <div class="onhuld">On Hold</div>
+                <div class="completed" id="completed"></div>
+                <div class="processing" id="processing" ></div>
+                <div class="rejected" id="rejected" ></div>
+                <div class="onhold" id="onhold" ></div>
             </div>
-            
        
             <script>
                 let completed = document.getElementById("completed");
                 let processing = document.getElementById("processing");
                 let rejected = document.getElementById("rejected");
                 let onhold = document.getElementById("onhold");
-                
-                
+               
+               
                 function completedStatus() {
                     completed.classList.add('completed-status');
                     processing.classList.add('notprocessing-status');
@@ -77,6 +100,13 @@
                     onhold.classList.add('notonhold-status');
                 }
 
+
+
+
+
+
+
+
                 function onholdStatus() {
                     onhold.classList.add('onhold-status');
                     onhold.classList.remove('notonhold-status');
@@ -84,7 +114,42 @@
                     processing.classList.add('notprocessing-status');
                     rejected.classList.add('notrejected-status');
                 }
-                
+               
             </script>
+        </div>
+
+
+
+
+        <div class="content">
+            <div class="card2">
+                <img class="slides" src="https://i.ibb.co/Qpc3KVk/quote1.jpg" alt="quote1">
+                <img class="slides" src="https://i.ibb.co/tYn0MsW/quote2.jpg" alt="Slide 2">
+                <img class="slides" src="https://i.ibb.co/w6vXv0X/quote3.jpg" alt="Slide 3">
+                <img class="slides" src="https://i.ibb.co/BqrZRN5/quote4.jpg" alt="Slide 4">
+                <img class="slides" src="https://i.ibb.co/Dgt3zyk/quote5.jpg" alt="Slide 5">
+            </div>
+
+
+
+
+            <script>
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.slides');
+                const totalSlides = slides.length;
+           
+                function showSlide(index) {
+                    slides.forEach(slide => slide.style.opacity = '0');
+                    slides[index].style.opacity = '1';
+                }
+           
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    showSlide(currentSlide);
+                }
+                showSlide(currentSlide);
+                setInterval(nextSlide, 10000);
+            </script>
+        </div>        
     </body>
 </html>

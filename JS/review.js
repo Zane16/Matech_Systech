@@ -35,6 +35,13 @@ async function fetchAndDisplayTickets() {
         const tableBody = document.querySelector(".title_body");
         tableBody.innerHTML = ""; // Clear the table
 
+        if (ticketsSnapshot.empty) {
+            const noTicketsRow = document.createElement("tr");
+            noTicketsRow.innerHTML = `<td colspan="7">No tickets available</td>`;
+            tableBody.appendChild(noTicketsRow);
+            return;
+        }
+
         ticketsSnapshot.forEach(async (docSnapshot) => {
             const ticket = docSnapshot.data();
             const ticketId = docSnapshot.id;
@@ -87,7 +94,6 @@ async function fetchAndDisplayTickets() {
             tableBody.appendChild(newRow);
         });
 
-      
         document.querySelectorAll(".review-btn").forEach((btn) =>
             btn.addEventListener("click", handleReview)
         );
@@ -99,31 +105,7 @@ async function fetchAndDisplayTickets() {
     }
 }
 
-
-async function fetchTechnicians() {
-    try {
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("role", "==", "Technician"));
-        const querySnapshot = await getDocs(q);
-
-        const technicianSelect = document.getElementById("technicianSelect");
-        technicianSelect.innerHTML = `<option value="">Choose Technician</option>`; 
-        querySnapshot.forEach((doc) => {
-            const technician = doc.data();
-            const technicianId = doc.id;
-            const technicianName = technician.username || "Unnamed Technician";
-
-            const technicianOption = document.createElement("option");
-            technicianOption.value = technicianId;
-            technicianOption.textContent = technicianName;
-            technicianSelect.appendChild(technicianOption);
-        });
-    } catch (error) {
-        console.error("Error fetching technicians:", error);
-    }
-}
-
-
+// Review button handler
 function handleReview(event) {
     const modal = document.getElementById("reviewModal");
     const ticketId = event.target.dataset.ticketId;
@@ -147,7 +129,7 @@ function handleReview(event) {
     fetchTechnicians();
 }
 
-
+// Technician select handler
 document.getElementById("confirmTechnicianButton").addEventListener("click", async () => {
     const technicianSelect = document.getElementById("technicianSelect");
     const technicianId = technicianSelect.value;
@@ -175,12 +157,12 @@ document.getElementById("confirmTechnicianButton").addEventListener("click", asy
     }
 });
 
-
+// Close modal
 document.getElementById("closeModal").addEventListener("click", () => {
     document.getElementById("reviewModal").style.display = "none";
 });
 
-
+// Delete ticket handler
 async function handleDelete(event) {
     const ticketId = event.target.dataset.ticketId;
 
@@ -197,5 +179,5 @@ async function handleDelete(event) {
     }
 }
 
-
+// Fetch and display tickets when the page loads
 document.addEventListener("DOMContentLoaded", fetchAndDisplayTickets);
