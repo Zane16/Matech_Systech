@@ -1,12 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
-import { getDatabase, ref, child, get, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { getFirestore, doc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// Firebase configuration
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDe5nZSDQ-N5gTuoL2r7Q-9Z0oh7C_pc-k",
     authDomain: "matech-01.firebaseapp.com",
-    databaseURL: "https://matech-01-default-rtdb.firebaseio.com",
     projectId: "matech-01",
     storageBucket: "matech-01.appspot.com",
     messagingSenderId: "600983949439",
@@ -14,58 +13,53 @@ const firebaseConfig = {
     measurementId: "G-MYLH77L240"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getDatabase(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 let ticket_title = document.getElementById('ticket_title');
 let ticket_body = document.getElementById('ticket_body');
 let submit_btn = document.getElementById('submit_btn');
 
-function AddData() {
+async function AddData() {
     if (!ticket_title.value || !ticket_body.value) {
         alert("Please fill in all fields!");
         return;
     }
 
-    const timestamp = serverTimestamp();  
+    const user = auth.currentUser;
 
-    
-    set(ref(db, 'TicketContent/' + ticket_title.value), {
-        ticketTitle: ticket_title.value,
-        ticketContent: ticket_body.value,
-        timestamp: timestamp  
-    })
-    .then(() => {
-        alert("Data Added Successfully");
-    })
-    .catch((error) => {
-        alert("Data could not be added: " + error.message);
-    });
-}
-
-function RetData() {
-    if (!ticket_title.value) {
-        alert("Please provide a ticket title to search.");
+    if (!user) {
+        alert("User not authenticated.");
         return;
     }
 
-    const dbRef = ref(db);
+    try {
+        // Fetch user data from Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
 
-    get(child(dbRef, 'TicketContent/' + ticket_title.value))
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                const timestamp = new Date(data.timestamp).toLocaleString();  
-                alert(`Title: ${data.ticketTitle}\nContent: ${data.ticketContent}\nSubmitted At: ${timestamp}`);
-            } else {
-                alert("No data found for the given title.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching data: ", error);
+        if (!userDoc.exists()) {
+            alert("User data not found.");
+            return;
+        }
+
+        const username = userDoc.data().username; // Get username from user data
+
+        // Add ticket to the user's Tickets subcollection
+        await addDoc(collection(db, `users/${user.uid}/Tickets`), {
+            ticketTitle: ticket_title.value,
+            ticketContent: ticket_body.value,
+            timestamp: serverTimestamp(),
+            username: username, // Include the username
         });
+
+        alert("Ticket submitted successfully.");
+    } catch (error) {
+        console.error("Error adding ticket:", error);
+        alert("Failed to submit ticket.");
+    }
 }
 
 submit_btn.addEventListener('click', AddData);
-

@@ -28,7 +28,7 @@ li{
     cursor: pointer;
     
 }
-li:hover{
+a:hover{
     color: #2D55B4;
 }
 
@@ -41,6 +41,11 @@ ul li:nth-child(6){
     position: absolute;
     bottom: 140px;
 
+}
+
+a{
+    text-decoration: none;
+    color: white;
 }
 
 .fa-solid{
