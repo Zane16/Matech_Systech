@@ -4,6 +4,7 @@ body {
     font-family: Poppins, sans-serif;
 }
 
+
 .sidebar-wrapper {
     position: absolute;
     width: 260px;
@@ -11,9 +12,11 @@ body {
     transition: width 0.3s ease-in-out;
 }
 
+
 .sidebar-wrapper:hover {
     width: 260px;
 }
+
 
 .sidebar {
     width: 260px;
@@ -24,14 +27,17 @@ body {
     overflow: hidden;
 }
 
+
 .sidebar-wrapper:not(:hover) .sidebar {
     width: 150px;
 }
+
 
 .sidediv {
     padding: 20px;
     margin-top: 50px;
 }
+
 
 .sidebar a {
     text-decoration: none;
@@ -43,20 +49,24 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+
 .sidebar li {
     list-style: none;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
     font-size: 21px;
     transition: transform 0.3s ease-in-out;
 }
+
 
 .sidebar-wrapper:not(:hover) .sidebar li {
     font-size: 0;
 }
 
+
 .sidebar-wrapper:not(:hover) .sidebar i {
     font-size: 24px;
 }
+
 
 .sidediv i {
     margin-right: 10px;
@@ -64,9 +74,11 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+
 .sidebar li:hover {
     transform: translateX(10px);
 }
+
 
 .sidebar-wrapper .sidebar li.active {
     color: white;
@@ -75,13 +87,17 @@ body {
 }
 
 
+
+
 ul li:nth-child(5){
     font-weight: bolder;
 }
 
+
 .content {
     padding: 30px;
 }
+
 
 .content h1 {
     font-size: 28px;
@@ -98,11 +114,13 @@ ul li:nth-child(5){
     margin-bottom: 30px;
 }
 
+
 .card h3 {
     font-size: 18px;
     margin-bottom: 15px;
     color: #343a40;
 }
+
 
 
 .form-control {
@@ -112,10 +130,12 @@ ul li:nth-child(5){
     font-size: 14px;
 }
 
+
 .form-control:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
 
 
 .btn {
@@ -125,16 +145,19 @@ ul li:nth-child(5){
     transition: all 0.3s ease;
 }
 
+
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
     color: white;
 }
 
+
 .btn-primary:hover {
     background-color: #0056b3;
     border-color: #0056b3;
 }
+
 
 .btn-default {
     background-color: #e9ecef;
@@ -142,10 +165,12 @@ ul li:nth-child(5){
     color: #6c757d;
 }
 
+
 .btn-default:hover {
     background-color: #d6d8db;
     border-color: #d6d8db;
 }
+
 
 
 .list-group-item {
@@ -158,15 +183,18 @@ ul li:nth-child(5){
     transition: background-color 0.3s ease;
 }
 
+
 .list-group-item.active {
     background-color: #007bff;
     color: white;
     font-weight: bold;
 }
 
+
 .list-group-item:hover {
     background-color: #e9ecef;
 }
+
 
 
 .alert {
@@ -174,11 +202,13 @@ ul li:nth-child(5){
     padding: 10px 15px;
 }
 
+
 .alert-warning {
     background-color: #fff3cd;
     border-color: #ffeeba;
     color: #856404;
 }
+
 
 
 .profile-photo-wrapper {
@@ -196,6 +226,7 @@ ul li:nth-child(5){
 }
 
 
+
 #profile-photo {
     width: 100%;
     height: 100%;
@@ -203,6 +234,7 @@ ul li:nth-child(5){
     display: block;
     border-radius: 50%;
 }
+
 
 
 .upload-photo-btn {
@@ -222,9 +254,11 @@ ul li:nth-child(5){
     transition: background-color 0.3s ease;
 }
 
+
 .upload-photo-btn:hover {
     background-color: #0056b3;
 }
+
 
 
 .account-settings-fileinput {
@@ -234,6 +268,7 @@ ul li:nth-child(5){
     height: 1px;
     pointer-events: none;
 }
+
 
 
 .reset-btn {
@@ -247,9 +282,11 @@ ul li:nth-child(5){
     transition: background-color 0.3s ease;
 }
 
+
 .reset-btn:hover {
     background-color: #ddd;
 }
+
 
 .sidebar li:hover {
     transform: translateX(10px);

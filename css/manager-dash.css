@@ -39,6 +39,8 @@ body {
 }
 
 
+
+
 .sidebar a {
     text-decoration: none;
     color: white;
@@ -88,6 +90,16 @@ body {
 }
 
 
+.sidebar-wrapper .sidebar li.active {
+    color: white;
+    border-left: 8px solid #ffffff;
+    padding-left: 10px;
+}
+
+
+ul li:nth-child(1){
+    font-weight: bolder;
+}
 
 
 .sidebar-wrapper .sidebar li.active {
@@ -106,13 +118,7 @@ ul li:nth-child(1){
     width: 100%;
     height: 100px;
     background-color: #ffffff;
-
-
-
-
 }
-
-
 
 
 .avatar {
@@ -124,7 +130,6 @@ ul li:nth-child(1){
     right: 400px;
     top: 20px;
     color: #313442;
-
 }
 
 
@@ -138,14 +143,10 @@ ul li:nth-child(1){
 }
 
 
-
-
 .content {
     margin-left: 125px;
     padding: 20px;
 }
-
-
 
 
 .content h1 {
@@ -153,8 +154,6 @@ ul li:nth-child(1){
     color: #2D55B4;
     margin-bottom: 20px;
 }
-
-
 
 
 .card {
@@ -195,13 +194,9 @@ ul li:nth-child(1){
 }
 
 
-
-
 .card .section {
     padding: 10px;
 }
-
-
 
 
 .section h3 {
@@ -211,20 +206,16 @@ ul li:nth-child(1){
 }
 
 
-
-
 .section p {
     margin-bottom: 8px;
     font-size: 14px;
 }
 
 
-
-
 .completed {
     position: absolute;
-    top: 6.5em;
-    left: 86%;
+    top: 6.7em;
+    left: 90%;
     height: 20px;
     width: 20px;
     border-radius: 100%;
@@ -233,13 +224,9 @@ ul li:nth-child(1){
 }
 
 
-
-
 .completed:hover {
     cursor: pointer;
 }
-
-
 
 
 .completed-status {
@@ -249,12 +236,14 @@ ul li:nth-child(1){
 
 
 
+
+
 .komplitid {
     position: absolute;
     font-size: 15px;
     color: rgb(0, 182, 155);
     background-color: rgba(0, 182, 155, 0.3);
-    height: 1em;
+    height: 1.5em;
     width: 8em;
     text-align: center;
     border-radius: 5px;
@@ -269,10 +258,12 @@ ul li:nth-child(1){
 
 
 
+
+
 .processing {
     position: absolute;
-    top: 10.5em;
-    left: 86%;
+    top: 10.7em;
+    left: 90%;
     height: 20px;
     width: 20px;
     border-radius: 100%;
@@ -288,8 +279,6 @@ ul li:nth-child(1){
 }
 
 
-
-
 .processing-status {
     background-image: linear-gradient(green, rgba(0, 182, 155, 0.3));
 }
@@ -298,14 +287,12 @@ ul li:nth-child(1){
 }
 
 
-
-
 .prusising {
     position: absolute;
     font-size: 15px;
     color: rgb(98, 38, 239);
     background-color: rgba(98, 38, 239, 0.3);;
-    height: 1em;
+    height: 1.5em;
     width: 8em;
     text-align: center;
     border-radius: 5px;
@@ -315,12 +302,10 @@ ul li:nth-child(1){
 }
 
 
-
-
 .rejected {
     position: absolute;
-    top: 14.5em;
-    left: 86%;
+    top: 14.7em;
+    left: 90%;
     height: 20px;
     width: 20px;
     border-radius: 100%;
@@ -329,13 +314,9 @@ ul li:nth-child(1){
 }
 
 
-
-
 .rejected:hover {
     cursor: pointer;
 }
-
-
 
 
 .rejected-status {
@@ -346,14 +327,12 @@ ul li:nth-child(1){
 }
 
 
-
-
 .rijiktid {
     position: absolute;
     font-size: 15px;
     color: rgb(239, 56, 38);
     background-color: rgba(239, 56, 38, 0.3);
-    height: 1em;
+    height: 1.5em;
     width: 8em;
     text-align: center;
     border-radius: 5px;
@@ -363,12 +342,10 @@ ul li:nth-child(1){
 }
 
 
-
-
 .onhold {
     position: absolute;
-    top: 18.5em;
-    left: 86%;
+    top: 18.7em;
+    left: 90%;
     height: 20px;
     width: 20px;
     border-radius: 100%;
@@ -377,13 +354,9 @@ ul li:nth-child(1){
 }
 
 
-
-
 .onhold:hover {
     cursor: pointer;
 }
-
-
 
 
 .onhold-status {
@@ -401,7 +374,7 @@ ul li:nth-child(1){
     font-size: 15px;
     color: rgb(255, 167, 86);
     background-color: rgba(255, 167, 86, 0.3);
-    height: 1em;
+    height: 1.5em;
     width: 8em;
     text-align: center;
     border-radius: 5px;
@@ -409,8 +382,6 @@ ul li:nth-child(1){
     top: 18em;
     padding: 10px;
 }
-
-
 
 
 #separate {
@@ -423,8 +394,6 @@ ul li:nth-child(1){
 }
 
 
-
-
 #separate-2 {
     height: 300px;
     width: 1px;
@@ -433,8 +402,6 @@ ul li:nth-child(1){
     left: 66%;
     margin-top: 20px;
 }
-
-
 
 
 h4 {

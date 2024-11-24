@@ -180,11 +180,12 @@ async function handleReview(event) {
 
     // Close the modal
     closeModal.onclick = () => {
-        modal.style.display = "none";
+        modal.style.display = "none"; 
     };
 
-    // Confirm technician assignment
+
     confirmTechnicianButton.onclick = async () => {
+        console.log("Confirm Technician button clicked!"); 
         const selectedTechnicianId = document.getElementById("technicianSelect").value;
 
         if (selectedTechnicianId) {
@@ -192,11 +193,14 @@ async function handleReview(event) {
                 const ticketRef = doc(db, "users", userId, "userTickets", ticketId);
                 await updateDoc(ticketRef, { technicianId: selectedTechnicianId });
                 alert("Technician assigned successfully!");
-                fetchAndDisplayTickets();
+                fetchAndDisplayTickets(); 
+                modal.style.display = "none"; 
             } catch (error) {
                 console.error("Error assigning technician:", error);
                 alert("Failed to assign technician.");
             }
+        } else {
+            alert("Please select a technician.");
         }
     };
 }
@@ -218,7 +222,11 @@ async function handleDelete(event) {
 
 // Initialize and fetch tickets and technicians on page load
 window.onload = async () => {
+   
+    const modal = document.getElementById("reviewModal");
+    modal.style.display = "none"; 
+
     fetchAndDisplayTickets();
-    document.getElementById("loadingTechnicians").style.display = "block"; // Show loading text
+    document.getElementById("loadingTechnicians").style.display = "block"; 
     fetchTechnicians();
 };

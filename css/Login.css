@@ -2,17 +2,45 @@ body {
     margin: 0;
     background: #000000;
 
+
+
+
  
     background-position: center;
     background-size: cover;
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../Image/19366.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    
+   
     position: relative;
     z-index: -1;
     font-family: 'Poppins';
 }
+
+
+
+
+body {
+    margin: 0;
+    background: #000000;
+
+
+
+
+ 
+    background-position: center;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../Image/19366.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+    position: relative;
+    z-index: -1;
+    font-family: 'Poppins';
+}
+
+
+
 
 *{
     text-decoration: none;
@@ -25,24 +53,33 @@ body {
     font-family: Poppins;
     width: 100%;
     height: 90px;
-    
+   
 }
 .navdiv{
         position: absolute;
         display: flex;
         align-items: center;
-        
+       
         right: 10px;
         top: 15px;
 }
+
+
+
 
 .navdiv a div:hover i{
     color: #2D55B4;
 }
 
+
+
+
 .navdiv div:hover{
     color: #2D55B4;
 }
+
+
+
 
 li{
     list-style: none;
@@ -57,8 +94,11 @@ li a{
 .container img{
     width: 90%;
     border-radius: 10%;
-    
+   
 }
+
+
+
 
 .container{
     width: 20%;
@@ -68,13 +108,16 @@ li a{
     top: 55%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255);
     text-align: center;
     border-radius: 20px;
     padding: 50px 60px 70px;
     z-index: 5;
-    
+   
 }
+
+
+
 
 .signup{
     font-size: 90%;
@@ -82,17 +125,26 @@ li a{
     font-weight: lighter;
     margin: 20px 0;
     opacity: 0.8;
-    
+   
 }
+
+
+
 
 .input-field{
     height: 15%;
     margin: 5px 0;
-    
+   
     align-items: center;
     display: flex;
-    
+   
 }
+
+
+
+
+
+
 
 
 .input-field input{
@@ -106,7 +158,25 @@ li a{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
 
 
 .btn{
@@ -123,6 +193,9 @@ li a{
     border-radius: 10px;    
 }
 
+
+
+
 .google{
     width: 80%;
     height: 10%;
@@ -132,22 +205,31 @@ li a{
     border: none;
     border-radius: 30px;  
     display:inline-flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     margin: 5px 0;
 }
+
+
+
 
 .google:hover {
     background-color: rgb(210, 210, 210);
     cursor: pointer;
 }
 
+
+
+
 .google img{
     width: 15%;
     z-index: 10;
-    
-    
+   
+   
 }
+
+
+
 
 input{
     width: 100%;
@@ -162,6 +244,9 @@ input{
     z-index: 2;
 }
 
+
+
+
 .title{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -174,29 +259,47 @@ input{
     opacity: 0.8;
 }
 
+
+
+
 .title::before, .title::after{
     content: "";
     height: 1px;
     background-color: #000000;
     display: block;
 
+
+
+
 }
+
+
+
 
 .fa-solid{
     color: white;
     padding-right: 10px;
 }
 
+
+
+
 .fa-regular{
     color: white;
     padding-right: 10px
 }
+
+
+
 
 .fa-circle-info {
     top: 16.5%;
     right: 85%;
     position: absolute;
 }
+
+
+
 
 .about{
     color: white;
@@ -206,6 +309,9 @@ input{
     display: inline;
     top: 16px;
 }
+
+
+
 
 .about:hover{
     cursor: pointer;
@@ -219,9 +325,15 @@ input{
     top: 16px;
 }
 
+
+
+
 .contacts:hover {
     cursor: pointer;
 }
+
+
+
 
 .about-pop{
     left: 30%;
@@ -230,10 +342,13 @@ input{
     height: 70%;
     width: 40%;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255);
     z-index: 6;
     visibility: hidden;
 }
+
+
+
 
 .contacts-pop {
     left: 35%;
@@ -241,10 +356,13 @@ input{
     position: absolute;
     height: 70%;
     width: 30%;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255);
     border-radius: 20px;
     visibility: hidden;
 }
+
+
+
 
 h1 {
     text-align: center;
@@ -253,6 +371,9 @@ h1 {
     color: rgb(35,35,35);
 }
 
+
+
+
 h3 {
     text-align: center;
     font-family: 'Poppins';
@@ -260,6 +381,9 @@ h3 {
     color: rgb(35,35,35);
     font-size: 25px;
 }
+
+
+
 
 h4{
     text-align: justify;
@@ -273,13 +397,25 @@ h4{
 }
 
 
+
+
+
+
+
+
 .open-popup{
     visibility: visible;
 }
 
+
+
+
 .open-contacts{
     visibility: visible;
 }
+
+
+
 
 .done {
     position:absolute;
@@ -300,6 +436,9 @@ h4{
     background-color: rgb(52, 81, 146);
 }
 
+
+
+
 .Contactus {
     position:absolute;
     right: 37%;
@@ -314,37 +453,61 @@ h4{
     text-align: center;
 }
 
+
+
+
 .Contactus:hover {
     cursor: pointer;
     background-color: rgb(52, 81, 146);
 }
 
+
+
+
 .Name input {
     font-family: sans-serif;
     font-weight: lighter;
+    height: 3em;
     width: 60%;;
     position: relative;
     left: 20%;
-    border-radius: 0;
-    border: none;
-    border-bottom: solid 1px;
-    padding: 0 0;
-    padding-top: 20px;
+    border-radius: 15px;
+    border: solid 2px;
+    padding: 15px;
     font-size: 16px;
+    border-color: rgba(220, 220, 220, 0.5);
+    outline-color: #2D55B4;
 }
+
+
+
+
+.Name input:focus{
+    border-color: #2D55B4;
+}
+
+
+
 
 .Email input {
     font-family: sans-serif;
     font-weight: lighter;
+    height: 3em;
     width: 60%;;
     position: relative;
     left: 20%;
-    border-radius: 0;
-    border: none;
-    border-bottom: solid 1px;
+    border-radius: 15px;
+    border: solid 2px;
+    border-color: rgba(220, 220, 220, 0.5);
     padding: 0 0;
-    padding-top: 30px;
+    margin-top: 30px;
     font-size: 16px;
+    outline-color: #2D55B4;
+    padding: 15px;
+}
+
+.Email input:focus{
+    border-color: #2D55B4;
 }
 
 textarea {
@@ -354,15 +517,15 @@ textarea {
     position: relative;
     left: 20%;
     height: 40%;
-    border-radius: 0;
-    border: none;
-    border-bottom: solid 1px;
-    outline: none;
-    padding: 0 0;
-    padding-top: 30px;
+    border-radius: 15px;
+    border: solid 2px;
+    outline-color: #2D55B4;
+    margin-top: 30px;
     font-size: 16px;
     background-color: transparent;
     resize: none;
+    padding: 15px;
+    border-color: rgba(220, 220, 220, 0.5);
 }
 
 #signIn-btn:hover {
@@ -382,14 +545,17 @@ textarea {
     visibility: hidden;
 }
 
+
 .messageDiv{
     background-color: #696969;
     position: absolute;
     color: white;align-items: center;
-    
+   
     border-radius: 5px;
     font-size: 1rem;
     opacity: 0;
     animation: fadeOut 5s forwards;
-    
+   
 }
+
+
