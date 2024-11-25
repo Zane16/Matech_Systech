@@ -11,7 +11,7 @@
 
 body {
     font-family: 'Poppins';
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/Image/19366.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../Image/19366.jpg');
     background-size: cover;
     background-position: center;
     color: #333;
