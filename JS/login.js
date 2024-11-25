@@ -61,7 +61,7 @@ signin.addEventListener('click', async (event) => {
       } else if (role === "Client") {
         window.location.href = "./Client/dashboard-client.html";
       } else if (role === "Technician") {
-        window.location.href = "profile.html";
+        window.location.href = "/Technician/Tech-dash.html";
       } else {
         showMessage("Role not recognized. Please contact support.", "signInMessage");
       }
