@@ -59,7 +59,7 @@ signin.addEventListener('click', async (event) => {
       if (role === "Manager") {
         window.location.href = "/Manager/review.html";
       } else if (role === "Client") {
-        window.location.href = "/Client/dashboard-client.html";
+        window.location.href = "../Client/dashboard-client.html";
       } else if (role === "Technician") {
         window.location.href = "profile.html";
       } else {
