@@ -57,11 +57,11 @@ signin.addEventListener('click', async (event) => {
 
       // Redirect based on role
       if (role === "Manager") {
-        window.location.href = "../Manager/review.html";
+        window.location.href = "/Manager/review.html";
       } else if (role === "Client") {
-        window.location.href = "../Client/dashboard-client.html";
+        window.location.href = "/Client/dashboard-client.html";
       } else if (role === "Technician") {
-        window.location.href = "../Technician/Tech-dash.html";
+        window.location.href = "/Technician/Tech-dash.html";
       } else {
         showMessage("Role not recognized. Please contact support.", "signInMessage");
       }
